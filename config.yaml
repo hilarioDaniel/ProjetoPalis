@@ -1,0 +1,9 @@
+credentials:
+  usernames:
+    angelica.palis: { email: angelica.palis@gmail.com, logged_in: False, name: 'Angélica Palis', password: Palis1245@}
+    caio.tonus: { email: tonus.caio@gmail.com, logged_in: False, name: 'Caio Tonus', password: Tonus1245@}
+    eng.aisolutions: { email: eng.aisolutions@gmail.com, logged_in: False, name: Eng.Ai Solutions, password: Sol1245@}
+cookie:
+  expiry_days: 1
+  key: some_signature_key
+  name: some_cookie_name

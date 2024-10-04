@@ -1,0 +1,7 @@
+Coleta realizada em: 03/10/2024
+Responsável: Angélica
+Voluntary ID: 0024
+Tarefa: Punção Lombar
+Expert: Estudante
+Nome do arquivo CSV: TesteCaioTonus.csv
+========================================
