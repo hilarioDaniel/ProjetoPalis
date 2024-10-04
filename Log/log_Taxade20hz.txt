@@ -1,0 +1,7 @@
+Coleta realizada em: 04/10/2024
+Responsável: Daniel
+Voluntary ID: 0024
+Tarefa: Intubação
+Expert: Estudante
+Nome do arquivo CSV: Taxade20hz.csv
+========================================

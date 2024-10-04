@@ -27,7 +27,6 @@ def render_coleta():
         st.session_state.contador_pacotes = 0
 
     ############################### FUNCÕES ###############################
-
     ## LOG ##
     # Função para salvar os dados do formulário em um arquivo TXT na pasta 'Log'
     def salvar_log_txt(csv_filename, responsavel, voluntary_id, task, expert, data_coleta):

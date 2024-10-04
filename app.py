@@ -3,7 +3,6 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 
-
 # Configurações da página
 st.set_page_config(
     page_title="Painel - Coleta de Dados NIATS",

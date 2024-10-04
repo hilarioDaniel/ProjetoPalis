@@ -9,7 +9,7 @@ import contato
 
 ##### 1. Side bar lateral
 with st.sidebar:
-    logoHeader = Image.open("img/niats.png")
+    logoHeader = Image.open("./img/niats.png")
     st.image(logoHeader, use_column_width=True)
     st.header('Dashboard `version 1.0`')
     st.markdown("`Desenvolvido por:` [Daniel e Caio](https://www.instagram.com/prof.danielhilario/)")
