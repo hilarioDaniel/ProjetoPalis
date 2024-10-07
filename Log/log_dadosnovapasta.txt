@@ -1,7 +1,0 @@
-Coleta realizada em: 04/10/2024
-Responsável: Daniel
-Voluntary ID: 00054
-Tarefa: Intubação
-Expert: Médico
-Nome do arquivo CSV: dadosnovapasta.csv
-========================================

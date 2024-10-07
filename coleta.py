@@ -1,3 +1,4 @@
+# Importando as bibliotecas
 import streamlit as st
 import pandas as pd
 import socket
@@ -14,7 +15,11 @@ def render_coleta():
 
     # Configurações de IP e Porta
     UDP_IP = "0.0.0.0"  # Escuta em todas as interfaces de rede
-    UDP_PORT = 1234  # Porta usada no ESP8266 para envio
+    UDP_PORT = 1245  # Porta usada no ESP8266 para envio
+
+    # Fatores de sensibilidade
+    ACCEL_SENS = 4096.0  # Sensibilidade do acelerômetro
+    GYRO_SENS = 65.5     # Sensibilidade do giroscópio
 
     # Inicialização do estado da sessão
     if 'sensor_ok' not in st.session_state:
@@ -28,7 +33,6 @@ def render_coleta():
 
     ############################### FUNCÕES ###############################
     ## LOG ##
-    # Função para salvar os dados do formulário em um arquivo TXT na pasta 'Log'
     def salvar_log_txt(csv_filename, responsavel, voluntary_id, task, expert, data_coleta):
         if not os.path.exists('Log'):
             os.makedirs('Log')
@@ -46,15 +50,10 @@ def render_coleta():
     ## COMUNICAÇÃO COM O SENSOR ##
     def verificar_comunicacao():
         try:
-            # Cria o socket para testar a comunicação
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             sock.settimeout(5)
             sock.bind((UDP_IP, UDP_PORT))
-
-            # Recebe um pacote para teste
             data, addr = sock.recvfrom(1024)
-
-            # Se recebemos algum dado, o sensor está OK
             if len(data) > 0:
                 st.session_state.sensor_ok = True
                 st.success(f"Comunicação OK no endereço {UDP_IP}:{UDP_PORT}!")
@@ -62,7 +61,6 @@ def render_coleta():
                 st.session_state.sensor_ok = False
                 st.error("Falha na comunicação.")
             sock.close()
-
         except Exception as e:
             st.session_state.sensor_ok = False
             st.error(f"Erro ao verificar comunicação: {e}")
@@ -72,7 +70,6 @@ def render_coleta():
     def iniciar_coleta():
         if st.session_state.sensor_ok:
             try:
-                # Reabre o socket para coleta
                 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                 sock.bind((UDP_IP, UDP_PORT))
                 st.session_state.coletando_dados = True
@@ -82,9 +79,19 @@ def render_coleta():
                     data, addr = sock.recvfrom(1024)
 
                     # Ajuste aqui para desempacotar corretamente os dados
-                    if len(data) == 18:  # Esperamos 18 bytes (9 valores de 16 bits)
-                        unpacked_data = struct.unpack('9h', data)
-                        st.session_state.dados_coletados.append(unpacked_data)
+                    if len(data) == 16:  # Timestamp (4 bytes) + 6 valores (12 bytes)
+                        unpacked_data = struct.unpack('I6h', data)  # Timestamp + 6 valores de 16 bits
+                        timestamp, ax, ay, az, gx, gy, gz = unpacked_data
+
+                        # Convertendo os valores com os fatores de sensibilidade que o Caio tirou nao sei de onde
+                        ax = ax / ACCEL_SENS
+                        ay = ay / ACCEL_SENS
+                        az = az / ACCEL_SENS
+                        gx = gx / GYRO_SENS
+                        gy = gy / GYRO_SENS
+                        gz = gz / GYRO_SENS
+
+                        st.session_state.dados_coletados.append([timestamp, ax, ay, az, gx, gy, gz])
                     else:
                         st.error(f"Erro no tamanho do pacote ({len(data)} bytes)")
 
@@ -103,20 +110,15 @@ def render_coleta():
     def parar_coleta():
         st.session_state.coletando_dados = False
         st.warning("Coleta de dados interrompida.")
-        salvar_dados_csv()  # Salva os dados quando a coleta é interrompida
+        salvar_dados_csv()
 
     ##### SALVAR DADOS #####
     def salvar_dados_csv():
         if st.session_state.dados_coletados:
-            # Verifica se a pasta 'Coleta' existe, se não, cria a pasta
             if not os.path.exists('Coleta'):
                 os.makedirs('Coleta')
-
-            # Cabeçalhos para o arquivo csv
-            headers = ['accel_x', 'accel_y', 'accel_z', 'gyro_x', 'gyro_y', 'gyro_z', 'mag_x', 'mag_y', 'mag_z']
-
-            # Usa o nome de arquivo fornecido pelo usuário e salva na pasta coleta
-            csv_filename = f'Coleta/{st.session_state.csv_filename}'
+            headers = ['timestamp', 'accel_x', 'accel_y', 'accel_z', 'gyro_x', 'gyro_y', 'gyro_z']
+            csv_filename = f'./Coleta/{st.session_state.csv_filename}'
             df = pd.DataFrame(st.session_state.dados_coletados, columns=headers)
             df.to_csv(csv_filename, index=False)
             st.success(f"Dados salvos em {csv_filename}")
@@ -125,26 +127,21 @@ def render_coleta():
 
     def plotar_dados():
         if st.session_state.dados_coletados:
-            # Definimos os nomes corretos para as colunas ao criar o DataFrame
-            headers = ['accel_x', 'accel_y', 'accel_z', 'gyro_x', 'gyro_y', 'gyro_z', 'mag_x', 'mag_y', 'mag_z']
+            headers = ['timestamp', 'accel_x', 'accel_y', 'accel_z', 'gyro_x', 'gyro_y', 'gyro_z']
             df = pd.DataFrame(st.session_state.dados_coletados, columns=headers)
-
-            # Centralizar e expandir a visualização do DataFrame
             st.write("### Dados coletados")
             st.dataframe(df.style.set_properties(**{'text-align': 'center'}), use_container_width=True)
-
-            # Verifica se as colunas estão corretas e disponíveis
-            if all(col in df.columns for col in ['accel_x', 'gyro_x', 'mag_x']):
-                # Criação do gráfico interativo com Plotly
-                fig = px.line(df, x=df.index, y=['accel_x', 'gyro_x', 'mag_x'],
-                              labels={'value': 'Leitura do Sensor', 'index': 'Pacotes'},
+            if all(col in df.columns for col in ['accel_x', 'gyro_x']):
+                fig = px.line(df, x='timestamp', y=['accel_x', 'gyro_x'],
+                              labels={'value': 'Leitura do Sensor', 'timestamp': 'Timestamp (ms)'},
                               title='Gráfico dos Dados Coletados')
-                fig.update_layout(legend_title_text='Sensores', xaxis_title='Pacotes', yaxis_title='Leitura')
+                fig.update_layout(legend_title_text='Sensores', xaxis_title='Timestamp (ms)', yaxis_title='Leitura')
                 st.plotly_chart(fig)
             else:
                 st.warning("Colunas esperadas não encontradas no DataFrame.")
         else:
             st.warning("Nenhum dado disponível para plotar.")
+
 
     #################################### INTERFACE ####################################
 

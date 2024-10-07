@@ -1,7 +1,0 @@
-Coleta realizada em: 04/10/2024
-Responsável: adsa
-Voluntary ID: daa
-Tarefa: Intubação
-Expert: Médico
-Nome do arquivo CSV: testetestetse
-========================================

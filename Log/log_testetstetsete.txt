@@ -1,7 +1,0 @@
-Coleta realizada em: 04/10/2024
-Responsável: tstetse
-Voluntary ID: 00000
-Tarefa: Intubação
-Expert: Médico
-Nome do arquivo CSV: testetstetsete
-========================================

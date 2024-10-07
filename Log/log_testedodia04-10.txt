@@ -1,7 +1,0 @@
-Coleta realizada em: 04/10/2024
-Responsável: Caio
-Voluntary ID: 00034
-Tarefa: Intubação
-Expert: Médico
-Nome do arquivo CSV: testedodia04-10
-========================================

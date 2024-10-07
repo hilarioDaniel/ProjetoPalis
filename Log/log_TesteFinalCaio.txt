@@ -1,0 +1,7 @@
+Coleta realizada em: 06/10/2024
+Responsável: Daniel
+Voluntary ID: 00024
+Tarefa: Extubação
+Expert: Profissional da UTI
+Nome do arquivo CSV: TesteFinalCaio.csv
+========================================
