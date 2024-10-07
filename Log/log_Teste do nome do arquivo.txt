@@ -1,0 +1,7 @@
+Coleta realizada em: 07/10/2024
+Responsável: Daniel
+Voluntary ID: 000045
+Tarefa: Extubação
+Expert: Estudante
+Nome do arquivo CSV: Teste do nome do arquivo.csv
+========================================

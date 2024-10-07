@@ -150,8 +150,12 @@ def render_coleta():
     with st.form("formulario_coleta"):
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.session_state.csv_filename = st.text_input('Nome do arquivo CSV', value='',
-                                                          placeholder='Digite o nome do arquivo')
+            csv_filename_input = st.text_input('Nome do arquivo', value='', placeholder='Digite o nome do arquivo')
+            # Verifica se o nome do arquivo já tem '.csv' e adiciona se necessário
+            if csv_filename_input and not csv_filename_input.endswith('.csv'):
+                st.session_state.csv_filename = f"{csv_filename_input}.csv"
+            else:
+                st.session_state.csv_filename = csv_filename_input
         with col2:
             responsavel = st.text_input('Responsável pela coleta', value='', placeholder='Digite o nome do responsável')
         with col3:
