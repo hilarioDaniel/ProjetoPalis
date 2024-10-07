@@ -8,11 +8,21 @@ import coleta
 import contato
 
 ##### 1. Side bar lateral
+# with st.sidebar:
+#     logoHeader = Image.open("./img/niats.png")
+#     st.image(logoHeader, use_column_width=True)
+#     st.header('Dashboard for GY-87')
+#     st.header('`version 1.0`')
+#     st.markdown("`Developed by:` [Daniel Hilário](https://www.instagram.com/prof.danielhilario/) `e` [Caio Tonus](https://www.instagram.com/caiotonus/)")
 with st.sidebar:
     logoHeader = Image.open("./img/niats.png")
-    st.image(logoHeader, use_column_width=True)
-    st.header('Dashboard `version 1.0`')
-    st.markdown("`Developed by:` [Daniel Hilário](https://www.instagram.com/prof.danielhilario/) e [Caio Tonus](https://www.instagram.com/caiotonus/)")
+    
+    # Ajuste o tamanho da imagem e centralize
+    st.image(logoHeader, width=250)  # Ajuste o valor de 'width' para o tamanho desejado
+    st.header('Dashboard for GY-87')
+    st.header('`version 1.0`')
+    st.markdown(
+        "`Developed by:` [Daniel Hilário](https://www.instagram.com/prof.danielhilario/) `e` [Caio Tonus](https://www.instagram.com/caiotonus/)")
 
     # Menu lateral
     selected = option_menu(
