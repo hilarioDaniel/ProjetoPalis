@@ -1,7 +1,0 @@
-Coleta realizada em: 06/10/2024
-Responsável: Daniel
-Voluntary ID: 00024
-Tarefa: Intubação
-Expert: Estudante
-Nome do arquivo CSV: Testetimestamp
-========================================

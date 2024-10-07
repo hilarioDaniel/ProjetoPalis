@@ -15,7 +15,7 @@ def render_coleta():
 
     # Configurações de IP e Porta
     UDP_IP = "0.0.0.0"  # Escuta em todas as interfaces de rede
-    UDP_PORT = 1245  # Porta usada no ESP8266 para envio
+    UDP_PORT = 1245  # Porta usada no ESP8266 para envio - Validar no Arduino
 
     # Fatores de sensibilidade
     ACCEL_SENS = 4096.0  # Sensibilidade do acelerômetro

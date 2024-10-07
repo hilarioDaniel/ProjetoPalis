@@ -41,10 +41,20 @@ while True:
         print(f"Pacote recebido de {addr}")  # Exibe os dados binários recebidos
 
         # Verificar o tamanho do payload esperado
-        if len(data) == 16:
+        if len(data) == 16: # Timestamp (4 bytes) + 6 valores (12 bytes)
             # Desempacotar os valores
-            unpacked_data = struct.unpack('I6h', data)
+            unpacked_data = struct.unpack('I6h', data) # Timestamp + 6 valores de 16 bits
+            timestamp, ax, ay, az, gx, gy, gz = unpacked_data
 
+            # Convertendo os valores com os fatores de sensibilidade que o Caio tirou nao sei de onde
+            ax = ax / ACCEL_SENS
+            ay = ay / ACCEL_SENS
+            az = az / ACCEL_SENS
+            gx = gx / GYRO_SENS
+            gy = gy / GYRO_SENS
+            gz = gz / GYRO_SENS
+
+            ####################### Finalizar o arquivo Receiver ######################
             # Exibir os dados desempacotados para validação
             print(f"Dados desempacotados: {unpacked_data}")
 
