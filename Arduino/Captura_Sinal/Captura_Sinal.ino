@@ -9,7 +9,7 @@ WiFiUDP Udp;
 static const float ACCEL_SENS = 4096.0; // Accel Sensitivity with +/- 8g scale
 static const float GYRO_SENS  = 65.5;   // Gyro Sensitivity with +/- 500 deg/s scale
 const int MPU = 0x68; // MPU6050 I2C address
-IPAddress outIp(192, 168, 1, 54); // IP do computador para envio de dados
+IPAddress outIp(192, 168, 1, 57); // IP do computador para envio de dados
 const unsigned int outPort = 1245; // Porta remota para envio de dados
 
 // Configurações para leitura dos dados
@@ -91,5 +91,5 @@ void loop(void)
     Udp.endPacket();
 
     // Delay para evitar sobrecarga no envio de dados
-    delay(5000);
+    delay(1000);
 }

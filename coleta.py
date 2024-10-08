@@ -71,9 +71,16 @@ def render_coleta():
             sock.close()
 
     ##### COLETA #####
+    def limpar_dados_coletados():
+        st.session_state.dados_coletados = []
+        st.session_state.contador_pacotes = 0
+        st.success("Dados anteriores foram limpos.")
+
     def iniciar_coleta():
         if st.session_state.sensor_ok:
+            limpar_dados_coletados() #Limpar os dados ao iniciarmos a coleta.
             try:
+                #Reabre o socket para a coleta.
                 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                 sock.bind((UDP_IP, UDP_PORT))
                 st.session_state.coletando_dados = True
@@ -145,6 +152,8 @@ def render_coleta():
                 st.warning("Colunas esperadas não encontradas no DataFrame.")
         else:
             st.warning("Nenhum dado disponível para plotar.")
+
+        limpar_dados_coletados() #limpar os dados
 
 
     #################################### INTERFACE ####################################
