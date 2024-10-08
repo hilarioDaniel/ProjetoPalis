@@ -5,3 +5,17 @@ Tarefa: Extubação
 Expert: Profissional da UTI
 Nome do arquivo CSV: TesteFinalCaio.csv
 ========================================
+Coleta realizada em: 07/10/2024
+Responsável: Miguel
+Voluntary ID: 0056
+Tarefa: Extubação
+Expert: Outros
+Nome do arquivo CSV: TesteFinalCaio.csv
+==================================================
+Coleta realizada em: 07/10/2024
+Responsável: José
+Voluntary ID: 0056
+Tarefa: Punção Lombar
+Expert: Profissional da UTI
+Nome do arquivo CSV: TesteFinalCaio.csv
+==================================================

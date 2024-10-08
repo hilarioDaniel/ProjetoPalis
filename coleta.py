@@ -36,7 +36,10 @@ def render_coleta():
     def salvar_log_txt(csv_filename, responsavel, voluntary_id, task, expert, data_coleta):
         if not os.path.exists('Log'):
             os.makedirs('Log')
+
         log_filename = f"Log/log_{csv_filename.replace('.csv', '')}.txt"
+
+        #Cria ou sobrescreve o arquivo de log
         with open(log_filename, 'a') as file:
             file.write(f"Coleta realizada em: {data_coleta}\n")
             file.write(f"Responsável: {responsavel}\n")
@@ -44,7 +47,8 @@ def render_coleta():
             file.write(f"Tarefa: {task}\n")
             file.write(f"Expert: {expert}\n")
             file.write(f"Nome do arquivo CSV: {csv_filename}\n")
-            file.write("=" * 40 + "\n")
+            file.write("=" * 50 + "\n")
+
         st.success(f"Log de coleta salvo em: {log_filename}")
 
     ## COMUNICAÇÃO COM O SENSOR ##

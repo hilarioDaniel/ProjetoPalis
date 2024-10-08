@@ -1,0 +1,7 @@
+Coleta realizada em: 07/10/2024
+Responsável: Miguel
+Voluntary ID: 00056
+Tarefa: Punção Lombar
+Expert: Outros
+Nome do arquivo CSV: tstestetse.csv
+==================================================
