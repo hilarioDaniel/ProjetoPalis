@@ -1,0 +1,7 @@
+Coleta realizada em: 09/10/2024
+Responsável: Angelica
+Voluntary ID: 0003
+Tarefa: Extubação
+Expert: Profissional da UTI
+Nome do arquivo CSV: Miguel-0002-Extubacao-09-08-24.csv
+==================================================

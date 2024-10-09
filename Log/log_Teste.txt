@@ -1,0 +1,7 @@
+Coleta realizada em: 09/10/2024
+Responsável: Adriano
+Voluntary ID: 00034
+Tarefa: Punção Lombar
+Expert: Profissional da UTI
+Nome do arquivo CSV: Teste.csv
+==================================================

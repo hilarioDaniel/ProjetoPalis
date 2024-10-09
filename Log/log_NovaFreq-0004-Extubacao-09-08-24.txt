@@ -1,0 +1,7 @@
+Coleta realizada em: 09/10/2024
+Responsável: Angelica
+Voluntary ID: 0004
+Tarefa: Intubação
+Expert: Profissional da UTI
+Nome do arquivo CSV: NovaFreq-0004-Extubacao-09-08-24.csv
+==================================================
